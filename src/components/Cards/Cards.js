@@ -2,12 +2,12 @@ import React from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import styles from "./Cards.module.css";
 import CountUp from "react-countup";
+import cx from "classnames";
 
 const Cards = (props) => {
   const {
     data: { confirmed, deaths, recovered, lastUpdate },
   } = props;
-  console.log(confirmed);
 
   if (!confirmed) {
     return "Loading...";
@@ -16,7 +16,13 @@ const Cards = (props) => {
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
-        <Grid item component={Card}>
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.infected)}
+        >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Infected
@@ -38,15 +44,21 @@ const Cards = (props) => {
           </CardContent>
         </Grid>
 
-        <Grid item component={Card}>
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.recovered)}
+        >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected
+              Recovered
             </Typography>
             <Typography variant="h5">
               <CountUp
                 start={0}
-                end={confirmed.value}
+                end={recovered.value}
                 duration={2}
                 separator=","
               ></CountUp>
@@ -60,15 +72,21 @@ const Cards = (props) => {
           </CardContent>
         </Grid>
 
-        <Grid item component={Card}>
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.deaths)}
+        >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected
+              Deaths
             </Typography>
             <Typography variant="h5">
               <CountUp
                 start={0}
-                end={confirmed.value}
+                end={deaths.value}
                 duration={2}
                 separator=","
               ></CountUp>
