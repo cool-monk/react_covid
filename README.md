@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Sample Images
 ### sample 1
-![alt text](../react_covid/src/images/image1.png?raw=true)
+![alt text](./src/images/image1.png?raw=true)
 ### sample 2
-![alt text](../react_covid/src/images/image2.png?raw=true)
+![alt text](./src/images/image2.png?raw=true)
 
 
 ## Available Scripts
