@@ -8,10 +8,12 @@ import React, { Component } from "react";
 import { Cards, CountryPicker, Charts } from "./components";
 import styles from "./App.module.css";
 import { fetchData } from "./api";
+import coronaImage from "./images/image.png";
 
 export class App extends Component {
   state = {
     data: {},
+    country: "",
   };
 
   async componentDidMount() {
@@ -22,14 +24,25 @@ export class App extends Component {
     });
   }
 
+  handleCountryChange = async (countryVal) => {
+    const fetchedData2 = await fetchData(countryVal);
+    this.setState({
+      data: fetchedData2,
+      country: countryVal,
+    });
+  };
+
   render() {
-    const { data } = this.state;
+    const { data, country } = this.state;
 
     return (
       <div className={styles.container}>
+        <img className={styles.image} src={coronaImage} alt="corona Title" />
         <Cards data={data}></Cards>
-        <CountryPicker></CountryPicker>
-        <Charts></Charts>
+        <CountryPicker
+          handleCountryChange={this.handleCountryChange}
+        ></CountryPicker>
+        <Charts data={data} country={country}></Charts>
       </div>
     );
   }
