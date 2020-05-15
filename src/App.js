@@ -5,10 +5,13 @@ import React, { Component } from "react";
 // import CountryPicker from "./components/CountryPicker/CountryPicker";
 // import Charts from "./components/Charts/Charts";
 
-import { Cards, CountryPicker, Charts } from "./components";
+import { Cards, CountryPicker, Charts, ThemeToggle } from "./components";
 import styles from "./App.module.css";
 import { fetchData } from "./api";
 import coronaImage from "./images/image.png";
+
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 export class App extends Component {
   state = {
@@ -36,14 +39,18 @@ export class App extends Component {
     const { data, country } = this.state;
 
     return (
-      <div className={styles.container}>
-        <img className={styles.image} src={coronaImage} alt="corona Title" />
-        <Cards data={data}></Cards>
-        <CountryPicker
-          handleCountryChange={this.handleCountryChange}
-        ></CountryPicker>
-        <Charts data={data} country={country}></Charts>
-      </div>
+      <Provider store={store}>
+        <ThemeToggle></ThemeToggle>
+        <div className={styles.container}>
+          <img className={styles.image} src={coronaImage} alt="corona Title" />
+
+          <Cards data={data}></Cards>
+          <CountryPicker
+            handleCountryChange={this.handleCountryChange}
+          ></CountryPicker>
+          <Charts data={data} country={country}></Charts>
+        </div>
+      </Provider>
     );
   }
 }
