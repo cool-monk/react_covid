@@ -4,6 +4,13 @@
   width: 70%;
 }
 
+.canvasDark {
+  background: rgb(202, 199, 199);
+  border-radius: 20px;
+  border: 7px solid black;
+  padding: 5px;
+}
+
 @media (max-width: 770px) {
   .container {
     width: 100%;

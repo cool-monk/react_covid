@@ -3,8 +3,14 @@ import { fetchDailyData } from "../../api";
 
 import { Line, Bar } from "react-chartjs-2";
 import styles from "./Charts.module.css";
+import cx from "classnames";
+import { connect } from "react-redux";
 
-const Charts = ({ data: { confirmed, recovered, deaths }, country }) => {
+const Charts = ({
+  data: { confirmed, recovered, deaths },
+  country,
+  isDark,
+}) => {
   const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
@@ -61,8 +67,20 @@ const Charts = ({ data: { confirmed, recovered, deaths }, country }) => {
   ) : null;
 
   return (
-    <div className={styles.container}>{country ? barChart : lineChart}</div>
+    <div
+      className={
+        !isDark ? cx(styles.container) : cx(styles.container, styles.canvasDark)
+      }
+    >
+      {country ? barChart : lineChart}
+    </div>
   );
 };
 
-export default Charts;
+const mapStateToProps = (state) => {
+  return {
+    isDark: state.theme.isDark,
+  };
+};
+
+export default connect(mapStateToProps)(Charts);

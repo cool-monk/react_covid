@@ -9,9 +9,9 @@ import { Cards, CountryPicker, Charts, ThemeToggle } from "./components";
 import styles from "./App.module.css";
 import { fetchData } from "./api";
 import coronaImage from "./images/image.png";
+import cx from "classnames";
 
-import { Provider } from "react-redux";
-import store from "./redux/store";
+import { connect } from "react-redux";
 
 export class App extends Component {
   state = {
@@ -39,20 +39,29 @@ export class App extends Component {
     const { data, country } = this.state;
 
     return (
-      <Provider store={store}>
+      <>
+        {this.props.isDark
+          ? document.querySelector(".mainBody").classList.toggle("darkBody")
+          : document.querySelector(".mainBody").classList.toggle("darkBody")}
         <ThemeToggle></ThemeToggle>
         <div className={styles.container}>
           <img className={styles.image} src={coronaImage} alt="corona Title" />
-
           <Cards data={data}></Cards>
           <CountryPicker
             handleCountryChange={this.handleCountryChange}
           ></CountryPicker>
+
           <Charts data={data} country={country}></Charts>
         </div>
-      </Provider>
+      </>
     );
   }
 }
+// Step:1
+const mapStateToProps = (state) => {
+  return {
+    isDark: state.theme.isDark,
+  };
+};
 
-export default App;
+export default connect(mapStateToProps)(App);

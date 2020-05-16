@@ -38,7 +38,7 @@ function ThemeToggle(props) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleTheme: (number) => {
+    toggleTheme: () => {
       dispatch(toggleTheme());
     },
   };
