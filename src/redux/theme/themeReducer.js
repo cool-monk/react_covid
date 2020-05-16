@@ -11,7 +11,6 @@ const themeReducer = (state = initialState, action) => {
 
     case THEME_TOGGLE: {
       return {
-        ...state,
         isDark: !state.isDark,
       };
     }

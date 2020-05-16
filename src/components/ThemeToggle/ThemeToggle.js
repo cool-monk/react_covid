@@ -1,12 +1,18 @@
 import React from "react";
 import "./ThemeToggle.css";
+import { connect } from "react-redux";
+import { toggleTheme } from "../../redux";
 
-function ThemeToggle() {
+function ThemeToggle(props) {
   return (
-    <div>
+    <>
       <div className="wrapper">
         <input type="checkbox" id="hide-checkbox"></input>
-        <label for="hide-checkbox" className="toggle">
+        <label
+          for="hide-checkbox"
+          className="toggle"
+          onClick={props.toggleTheme}
+        >
           <span className="toggle-button">
             <span className="crater crater-1"></span>
             <span className="crater crater-2"></span>
@@ -26,8 +32,16 @@ function ThemeToggle() {
           <span className="star star-8"></span>
         </label>
       </div>
-    </div>
+    </>
   );
 }
 
-export default ThemeToggle;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleTheme: (number) => {
+      dispatch(toggleTheme());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ThemeToggle);
