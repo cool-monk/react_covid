@@ -41,8 +41,8 @@ export class App extends Component {
     return (
       <>
         {this.props.isDark
-          ? document.querySelector(".mainBody").classList.toggle("darkBody")
-          : document.querySelector(".mainBody").classList.toggle("darkBody")}
+          ? document.querySelector(".mainBody").classList.add("darkBody")
+          : document.querySelector(".mainBody").classList.remove("darkBody")}
         <ThemeToggle></ThemeToggle>
         <div className={styles.container}>
           <img className={styles.image} src={coronaImage} alt="corona Title" />
