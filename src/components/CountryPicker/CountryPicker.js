@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { NativeSelect, FormControl } from "@material-ui/core";
 import styles from "./CountryPicker.module.css";
 import { fetchCountries } from "../../api";
+import { connect } from "react-redux";
+import cx from "classnames";
 
-const CountryPicker = ({ handleCountryChange }) => {
+const CountryPicker = ({ handleCountryChange, isDark }) => {
   const [fetchedCountries, setFetchedCountries] = useState([]);
 
   useEffect(() => {
@@ -15,7 +17,13 @@ const CountryPicker = ({ handleCountryChange }) => {
   }, [setFetchedCountries]);
 
   return (
-    <FormControl className={styles.formControl}>
+    <FormControl
+      className={
+        isDark
+          ? cx(styles.darkSelector, styles.formControl)
+          : styles.formControl
+      }
+    >
       <NativeSelect
         defaultValue=""
         onChange={(e) => handleCountryChange(e.target.value)}
@@ -31,4 +39,10 @@ const CountryPicker = ({ handleCountryChange }) => {
   );
 };
 
-export default CountryPicker;
+const mapStateToProps = (state) => {
+  return {
+    isDark: state.theme.isDark,
+  };
+};
+
+export default connect(mapStateToProps)(CountryPicker);
